@@ -1,5 +1,7 @@
 package info.cognit.dvdrental.validator;
 
+import info.cognit.dvdrental.domain.entity.RentalEntity;
+import info.cognit.dvdrental.dto.FilmRequest;
 import info.cognit.dvdrental.dto.Response;
 import info.cognit.dvdrental.dto.ResponseStatus;
 import org.springframework.http.HttpStatus;
@@ -24,4 +26,20 @@ public class FilmValidator {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    public Response<RentalEntity> validateRequiredFields(FilmRequest filmRequest) {
+        Response<RentalEntity> response = new Response<>();
+
+        if (filmRequest.getCustomer() == null || isEmpty(filmRequest.getCustomer().getFirstName()) || isEmpty(filmRequest.getCustomer().getLastName())) {
+            response.setStatus(ResponseStatus.ERROR);
+            response.setMessage("Customer first name and last name required");
+        }
+        return response;
+    }
+
+    private static boolean isEmpty (String value) {
+        if (value == null || value.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
 }

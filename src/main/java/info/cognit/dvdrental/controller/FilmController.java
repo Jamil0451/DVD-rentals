@@ -2,7 +2,9 @@ package info.cognit.dvdrental.controller;
 
 
 import info.cognit.dvdrental.domain.entity.FilmEntity;
+import info.cognit.dvdrental.domain.entity.RentalEntity;
 import info.cognit.dvdrental.domain.repository.FilmRepo;
+import info.cognit.dvdrental.dto.FilmRequest;
 import info.cognit.dvdrental.dto.Response;
 import info.cognit.dvdrental.dto.ResponseStatus;
 import info.cognit.dvdrental.service.FilmService;
@@ -53,5 +55,15 @@ public class FilmController {
 
         return filmService.getDvdsById(filmId);
     }
+    @GetMapping("/add")
+    public ResponseEntity<Response<RentalEntity>> add(@RequestBody FilmRequest filmRequest) {
+        Response<RentalEntity> response = filmValidator.validateRequiredFields(filmRequest);
+        if (response.getStatus() != ResponseStatus.ERROR) {
+            response = filmService.addRental(filmRequest);
+        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+
 
 }

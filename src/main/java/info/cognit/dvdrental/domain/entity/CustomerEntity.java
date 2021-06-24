@@ -17,7 +17,7 @@ public class CustomerEntity {
 
     @Id
     @Column(name = "CUSTOMER_ID")
-    private Long customerId;
+    private Integer customerId;
 
     @Column(name = "STORE_ID")
     private Integer storeId;

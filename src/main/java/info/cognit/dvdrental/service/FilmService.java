@@ -13,5 +13,5 @@ public interface FilmService {
 
     FilmEntity getDvdsById(Long filmId);
 
-    List<FilmEntity> getAllFilmByTitleAndReleaseYear(String title, Integer releaseYear);
+    List<FilmEntity> getAllDvdByTitleAndReleaseYear(String title, Integer releaseYear);
 }

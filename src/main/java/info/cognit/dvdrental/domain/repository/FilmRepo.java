@@ -8,6 +8,7 @@ import java.util.List;
 //CrudRepository is a part of the Spring Data JPA framework: CrudRepository,
 
 public interface FilmRepo extends CrudRepository<FilmEntity, Long> {
-   List<FilmEntity> findAllFilmByTitleAndReleaseYear(String title, Integer releaseYear);
+
+   List<FilmEntity> findAllDvdByTitleAndReleaseYear(String title, Integer releaseYear);
 
 }

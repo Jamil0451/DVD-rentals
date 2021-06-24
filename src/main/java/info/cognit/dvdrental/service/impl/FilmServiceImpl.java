@@ -1,8 +1,10 @@
 package info.cognit.dvdrental.service.impl;
 
 import info.cognit.dvdrental.domain.entity.FilmEntity;
+import info.cognit.dvdrental.domain.repository.CustomerRepo;
 import info.cognit.dvdrental.domain.repository.FilmRepo;
 import info.cognit.dvdrental.service.FilmService;
+import info.cognit.dvdrental.validator.FilmValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,12 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     private FilmRepo filmRepo;
+
+    @Autowired
+    private CustomerRepo customerRepo;
+
+    @Autowired
+    private FilmValidator filmValidator;
 
     @Override
     public List<FilmEntity> getAllDvds() {
@@ -31,9 +39,11 @@ public class FilmServiceImpl implements FilmService {
     }
 
     @Override
-    public List<FilmEntity> getAllFilmByTitleAndReleaseYear(String title, Integer releaseYear) {
-        return filmRepo.findAllFilmByTitleAndReleaseYear(title, releaseYear);
+    public List<FilmEntity> getAllDvdByTitleAndReleaseYear(String title, Integer releaseYear) {
+        return filmRepo.findAllDvdByTitleAndReleaseYear(title, releaseYear);
     }
+
+    @Override
 
 
 }

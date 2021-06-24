@@ -3,8 +3,13 @@ package info.cognit.dvdrental.controller;
 
 import info.cognit.dvdrental.domain.entity.FilmEntity;
 import info.cognit.dvdrental.domain.repository.FilmRepo;
+import info.cognit.dvdrental.dto.Response;
+import info.cognit.dvdrental.dto.ResponseStatus;
 import info.cognit.dvdrental.service.FilmService;
+import info.cognit.dvdrental.validator.FilmValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +20,12 @@ public class FilmController {
 
     @Autowired
     private FilmService filmService;
+
     @Autowired
     FilmRepo filmRepo;
+
+    @Autowired
+    private FilmValidator filmValidator;
 
     @GetMapping("/all")
     public List<FilmEntity> getAll() {
@@ -24,9 +33,19 @@ public class FilmController {
     }
 
     @GetMapping(value = "/all", params = {"title", "releaseYear"})
-    public List<FilmEntity> getAllFilmByTitleAndReleaseYear(@RequestParam("title") String title, @RequestParam("releaseYear") Integer releaseYear) {
+    public ResponseEntity<Response> getAllDvdByTitleAndReleaseYear(@RequestParam("title") String title, @RequestParam("releaseYear") Integer releaseYear) {
 
-        return filmService.getAllFilmByTitleAndReleaseYear(title, releaseYear);
+        ResponseEntity<Response> responseEntity = filmValidator.validateGetAllDvdByTitleAndReleaseYear(title, releaseYear);
+        if (responseEntity.getBody().getStatus() == ResponseStatus.ERROR) {
+            return responseEntity;
+        }
+        List<FilmEntity> film = filmService.getAllDvdByTitleAndReleaseYear(title, releaseYear);
+        Response<List<FilmEntity>> response = new Response<>();
+        response.setBody(film);
+        response.setStatus(ResponseStatus.SUCCESS);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+
     }
 
     @GetMapping("/{filmId}")

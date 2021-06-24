@@ -4,16 +4,16 @@ package info.cognit.dvdrental.domain.entity;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="CUSTOMER")
 @Data
 public class CustomerEntity {
+
+    @GeneratedValue(generator = "customerIdGenerator", strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "customerIdGenerator", sequenceName = "customer_customer_id_seq", allocationSize = 1)
 
     @Id
     @Column(name = "CUSTOMER_ID")

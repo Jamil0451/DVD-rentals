@@ -45,7 +45,10 @@ public class FilmServiceImpl implements FilmService {
     @Override
     public FilmEntity getDvdsById(Long filmId) {
         Optional<FilmEntity> byId = filmRepo.findById(filmId);
-        return byId.get();
+        if (byId.isPresent()) {
+            return byId.get();
+        }
+        return null;
     }
 
     @Override

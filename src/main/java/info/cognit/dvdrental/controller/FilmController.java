@@ -51,11 +51,12 @@ public class FilmController {
 
     }
 
-    @GetMapping("/{filmId}")
-    public FilmEntity findDvdsById(@PathVariable Long filmId) {
+    @GetMapping( value = "/all", params = {"filmId"})
+    public FilmEntity findDvdsById(@RequestParam ("filmId") Long filmId) {
 
         return filmService.getDvdsById(filmId);
     }
+
     @GetMapping("/add")
     public ResponseEntity<Response<RentalEntity>> add(@RequestBody FilmRequest filmRequest) {
         Response<RentalEntity> response = filmValidator.validateRequiredFields(filmRequest);
@@ -64,7 +65,6 @@ public class FilmController {
         }
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
 
 
 }

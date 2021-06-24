@@ -1,8 +1,10 @@
 package info.cognit.dvdrental.service.impl;
 
+import info.cognit.dvdrental.domain.entity.AddressEntity;
 import info.cognit.dvdrental.domain.entity.CustomerEntity;
 import info.cognit.dvdrental.domain.entity.FilmEntity;
 import info.cognit.dvdrental.domain.entity.RentalEntity;
+import info.cognit.dvdrental.domain.repository.AddressRepo;
 import info.cognit.dvdrental.domain.repository.CustomerRepo;
 import info.cognit.dvdrental.domain.repository.FilmRepo;
 import info.cognit.dvdrental.domain.repository.RentalRepo;
@@ -11,6 +13,7 @@ import info.cognit.dvdrental.dto.Response;
 import info.cognit.dvdrental.dto.ResponseStatus;
 import info.cognit.dvdrental.service.FilmService;
 import info.cognit.dvdrental.validator.FilmValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class FilmServiceImpl implements FilmService {
 
     @Autowired
@@ -27,6 +31,9 @@ public class FilmServiceImpl implements FilmService {
 
     @Autowired
     private CustomerRepo customerRepo;
+
+    @Autowired
+    private AddressRepo addressRepo;
 
     @Autowired
     private RentalRepo rentalRepo;
@@ -58,6 +65,8 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public Response<RentalEntity> addRental(FilmRequest filmRequest) {
+
+        log.info("AddRental was called");
         Response<RentalEntity> response = new Response<>();
 
         // 1. Check if the customer exists in DB. if not then create.
@@ -71,6 +80,8 @@ public class FilmServiceImpl implements FilmService {
 
         RentalEntity rental = rentalRepo.findByReturnDate(filmRequest.getRental().getReturnDate());
 
+   //     AddressEntity address = addressRepo.save(filmRequest.getAddress().getAddress(), filmRequest.getAddress().getDistrict());
+
         if (rental != null){
             response.setMessage("DVD is not available for rent");
             response.setStatus(ResponseStatus.ERROR);
@@ -83,6 +94,13 @@ public class FilmServiceImpl implements FilmService {
         response.setStatus(ResponseStatus.SUCCESS);
         return response;
 
+    }
+
+    private Object buildNewAddress(FilmRequest filmRequest, String address, String district) {
+        AddressEntity addressEntity = new AddressEntity();
+        addressEntity.setAddress(address);
+        addressEntity.setPostalCode(district);
+        return addressEntity;
     }
 
     private RentalEntity buildNewRental(FilmRequest filmRequest, Integer customerId, Integer inventoryId) {

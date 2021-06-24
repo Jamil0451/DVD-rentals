@@ -9,6 +9,7 @@ import info.cognit.dvdrental.dto.Response;
 import info.cognit.dvdrental.dto.ResponseStatus;
 import info.cognit.dvdrental.service.FilmService;
 import info.cognit.dvdrental.validator.FilmValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/film")
+@Slf4j
 public class FilmController {
 
     @Autowired
@@ -59,6 +61,8 @@ public class FilmController {
 
     @GetMapping("/add")
     public ResponseEntity<Response<RentalEntity>> add(@RequestBody FilmRequest filmRequest) {
+
+        log.info("add was called");
         Response<RentalEntity> response = filmValidator.validateRequiredFields(filmRequest);
         if (response.getStatus() != ResponseStatus.ERROR) {
             response = filmService.addRental(filmRequest);

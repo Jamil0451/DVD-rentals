@@ -10,5 +10,6 @@ public class FilmRequest {
     private PaymentEntity payment;
     private InventoryEntity inventory;
     private RentalEntity rental;
+    private AddressEntity address;
 
 }

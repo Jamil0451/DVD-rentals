@@ -18,7 +18,6 @@ public class FilmServiceTest {
     @InjectMocks
     private FilmService filmService = new FilmServiceImpl();
 
-
     @Test
     public void testExistingCustomer(){
 

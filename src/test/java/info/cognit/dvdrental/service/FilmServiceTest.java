@@ -6,6 +6,7 @@ import info.cognit.dvdrental.service.impl.FilmServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 public class FilmServiceTest {
 
@@ -19,7 +20,9 @@ public class FilmServiceTest {
     private FilmService filmService = new FilmServiceImpl();
 
     @Test
-    public void testExistingCustomer(){
+    public void testGetAllDvdByTitleAndReleaseYear(){
+
+//        Mockito.when(filmRepo.findAllDvdByTitleAndReleaseYear(Mockito.any())).thenReturn((get))
 
     }
 

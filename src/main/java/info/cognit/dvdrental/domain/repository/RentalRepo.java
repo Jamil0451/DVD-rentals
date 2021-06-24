@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 import java.time.LocalDateTime;
 
 public interface RentalRepo extends CrudRepository<RentalEntity, Long> {
-    RentalEntity findReturnDate(LocalDateTime returnDate);
+    RentalEntity findByReturnDate(LocalDateTime returnDate);
 }

@@ -66,7 +66,7 @@ public class FilmServiceImpl implements FilmService {
             customer = customerRepo.save(filmRequest.getCustomer());       //insert the customer to DB
         }
 
-        RentalEntity rental = rentalRepo.findReturnDate(filmRequest.getRental().getReturnDate());
+        RentalEntity rental = rentalRepo.findByReturnDate(filmRequest.getRental().getReturnDate());
 
         if (rental != null){
             response.setMessage("DVD is not available for rent");
@@ -90,6 +90,5 @@ public class FilmServiceImpl implements FilmService {
         rentalEntity.setInventoryId(inventoryId);
         return rentalEntity;
     }
-
 
 }

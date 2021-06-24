@@ -44,6 +44,7 @@ public class FilmController {
         List<FilmEntity> film = filmService.getAllDvdByTitleAndReleaseYear(title, releaseYear);
         Response<List<FilmEntity>> response = new Response<>();
         response.setBody(film);
+        response.setMessage("The following movie exists!");
         response.setStatus(ResponseStatus.SUCCESS);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -99,7 +99,7 @@ public class FilmServiceImpl implements FilmService {
     private Object buildNewAddress(FilmRequest filmRequest, String address, String district) {
         AddressEntity addressEntity = new AddressEntity();
         addressEntity.setAddress(address);
-        addressEntity.setPostalCode(district);
+        addressEntity.setDistrict(district);
         return addressEntity;
     }
 

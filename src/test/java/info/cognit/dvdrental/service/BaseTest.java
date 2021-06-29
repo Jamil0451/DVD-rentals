@@ -21,7 +21,6 @@ public class BaseTest {
         filmEntity.setReleaseYear(2006);
         FilmRequest request = new FilmRequest();
         request.setFilm(filmEntity);
-
         return request;
 
     }

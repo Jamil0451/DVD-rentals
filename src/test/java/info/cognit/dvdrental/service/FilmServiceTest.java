@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 
 @ExtendWith(MockitoExtension.class)
-public class FilmServiceTest extends BaseTest{
+public class FilmServiceTest extends BaseTest {
 
     @Mock
     private FilmRepo filmRepo;
@@ -31,13 +31,12 @@ public class FilmServiceTest extends BaseTest{
 
 
     @Test
-    public void testDVD(){
+    public void testDVD() {
 
         //Instruct the mockito to output specific outcome for this req
 
         Mockito.when(filmRepo.findAllDvdByTitleAndReleaseYear(Mockito.any(), Mockito.any())).thenReturn((List<FilmEntity>) getFilmEntityAsResponse());
-        }
-
+    }
 
 
 }

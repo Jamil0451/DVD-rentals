@@ -15,8 +15,8 @@ User should be able to retrieve available DVDs from the store
     *Verify the customer exists in the DB otherwise create a customer
     
     *Verify the films are available to rent out.
-        -You can query the inventory table to find out the available count of the film
-        -You can then query the rental table where the return dates are null to make sure the inventory is available for rent
+        -Query the inventory table to find out the available count of the film
+        -Query the rental table where the return dates are null to make sure the inventory is available for rent
         -If it's available insert a new record in the rental table
         -insert the payment details in the payment table
         -When the movie is not found or not available for renting, reply with a proper message
